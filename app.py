@@ -124,7 +124,22 @@ with col1:
     st.markdown("### 🏏 Batting Team & Score")
     batting_team = st.selectbox("Select Batting Team", teams, label_visibility="visible")
     current_score = st.number_input("Current Score", min_value=0, step=1, label_visibility="visible")
-    overs_completed = st.slider("Overs Completed", 0.1, 20.0, step=0.1, label_visibility="visible")
+    overs_completed = st.slider(
+    "Overs Completed",
+    min_value=0.0,
+    max_value=19.50,
+    step=0.1,
+    value=0.0,
+    help="Format: 0.0 to 19.5 (each 0.1 = 1 ball, max 6 balls per over)"
+)
+
+# ❌ BLOCK invalid overs like 0.6, 1.6, etc.
+overs_int = int(overs_completed)
+balls = round((overs_completed - overs_int) * 10)
+
+if balls >= 6:
+    st.error("❌ Invalid input: Balls cannot exceed 5 in an over")
+    st.stop()
 
 with col2:
     st.markdown("### 🎯 Bowling Team & Wickets")
@@ -191,12 +206,12 @@ elif match_type == "Batting Second":
 
         runs_left = target - current_score
 
-        if (overs_completed >= 20 or wickets_lost == 10) and current_score == target:
+        if (overs_completed >= 19.50 or wickets_lost == 10) and current_score == target:
             st.warning("🤝 Match Ended in a DRAW")
         elif current_score > target:
             st.success(f"🏆 {batting_team} has WON the match!")
             st.balloons()
-        elif (overs_completed >= 20 or wickets_lost == 10) and current_score < target:
+        elif (overs_completed >= 19.50 or wickets_lost == 10) and current_score < target:
             st.error(f"🎯 {bowling_team} has WON the match!")
         else:
             run_rate = current_score / overs_completed
