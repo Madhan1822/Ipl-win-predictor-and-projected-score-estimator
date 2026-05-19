@@ -1,0 +1,9 @@
+# IPL Dataset Sources
+
+## 1. IPL All Matches Dataset (2008–2025)
+🔗 https://www.kaggle.com/datasets/dhrubangtalukdar/indian-premier-league-ipl-all-matches2008-2025  
+📁 File Used: matches.csv  
+
+## 2. IPL Ball-by-Ball Dataset (2008–2023)
+🔗 https://www.kaggle.com/datasets/utkarshtomar736/ipl-mens-cricket-matches-data-2008-2023  
+📁 File Used: ipl_ball_by_ball.csv  
